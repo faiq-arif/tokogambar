@@ -1,6 +1,19 @@
+## Perbaikan yang Dapat Dilakukan (Possible Improvements)
+Masalah-masalah yang saya temukan pada program ini adalah:
+1. Program tidak bisa mendeteksi gambar yang secara visual sama tetapi memiliki resolusi yang berbeda.
+2. Program kurang efisien karena harus membuat hash untuk gambar referensi setiap kali dieksekusi. Hal ini disebabkan oleh tidak adanya database untuk menyimpan hash hasil pemrosesan sebelumnya.
+3. Antarmuka yang tidak menarik sehingga pengguna tidak merasa nyaman ketika menggunakan program ini.
+
+Solusi yang dapat diimplementasikan:
+1. Memodifikasi metode deteksi gambar yang telah ada.
+2. Menggunakan metode lain untuk mendeteksi kesamaan gambar.
+3. Membuat database yang menyimpan hash gambar referensi.
+4. Membuat antarmuka lebih menarik dengan CSS styling.
+
+
 # TokoGambar
 
-`TokoGambar` adalah sebuah platform dimana orang bisa menjual gambar yang mereka buat dengan harga tinggi. Gambar itu bisa berupa gambar apapun: wallpaper, fanart, komik, dan lain sebagainya.
+`TokoGambar` adalah sebuah platform dimana orang bisa menjual gambar yang mereka buat dengan harga tinggi. Gambar itu bisa berupa gambar apapun: wallpaper, fanart, koik, dan lain sebagainya.
 
 Ketika seorang penjual ingin menjual gambarnya, pihak `TokoGambar` akan melakukan beberapa verifikasi untuk menguji bahwa gambar tersebut adalah otentik milik sang penjual. Salah satu langkahnya adalah dengan mengecek apakah gambar tersebut replika dari salah satu gambar yang terdapat di situs `TokoGambar` atau tidak.
 
