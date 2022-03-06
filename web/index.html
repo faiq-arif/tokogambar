@@ -1,24 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,900;1,700&display=swap");
+
+/* CSS Variables */
+:root {
+  --normal-font: 400;
+  --bold-font: 600;
+  --bolder-font: 900;
+  --primary-color: #0652dd;
+  --secondary-color: #ea2027;
+  --line-height: 1.7rem;
+  --transition: 0.4s ease-in;
+  img {max-width: 100%}
+}
+
+/* Smooth scroll effect */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Resets */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: var(--transition);
+}
+
+ body {
+  font-family: "Roboto", sans-serf;
+}
+
+ul li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+a:hover {
+  color: var(--secondary-color);
+} 
+
+.cg {
+  color: var(--secondary-color);
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.bt {
+  color: var(--primary-color);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+nav {
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  box-shadow: 2px 3px 2px #f1f1f1;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.inputbox {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.results {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+</style>
+
+<nav>
+      <a href="#" class="logo">
+        <h1>
+          <span class="cg">Cek Gambar</span><span class="bt"> by TokoGambar</span>
+        </h1>
+      </a>
+</nav>
+<!--
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cek Gambar</title>
 </head>
+-->
 <body>
-    <div style="text-align: center;">
-        <div>
-            <img id="previewImage" width="200">
-        </div>
-        <br>
-        <div>
-            <input type="file" accept="image/*" id="inputFile" onchange="handleInputFile(this.files[0])">
-        </div>
-        <br>
-        <h3>Found Replica:</h3>
-        <div id="similarImages"></div>
-    </div>
+<div class="main" style="text-align: center">
+    	<br>
+    	<div></div>
+    	<br>
+    	<div class="inputbox">
+    			<input type="file" accept="image/*" id="inputFile" onchange="handleInputFile(this.files[0])">
+    			<br>
+   	 		<div></div>
+    			<br>
+    	</div>
+    	<div class="results">
+    		<br>
+   	 	<div></div>
+    		<br>
+    		<div class="inputImage">
+    			<h3>Your Image:</h3>
+    			<div>
+    				<img id="previewImage" width="200">
+    			</div>
+    		</div>
+    		<div class="replicaImage">
+    			<h3>Found Replica:</h3>
+    			<div id="similarImages"></div>
+    		</div>
+    	</div>
+</div>
 
     <script>
         function handleInputFile(file) {
