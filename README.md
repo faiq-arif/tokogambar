@@ -5,10 +5,10 @@ Masalah-masalah yang saya temukan pada program ini adalah:
 3. Antarmuka yang tidak menarik sehingga pengguna tidak merasa nyaman ketika menggunakan program ini.
 
 Solusi yang dapat diimplementasikan:
-1. Memodifikasi metode deteksi gambar yang telah ada.
-2. Menggunakan metode lain untuk mendeteksi kesamaan gambar.
+1. Memodifikasi metode deteksi gambar yang telah ada. [SKIP]
+2. Menggunakan metode lain untuk mendeteksi kesamaan gambar. [DONE: Perceptual Hashing (GoImageHash Lib)]
 3. Membuat database yang menyimpan hash gambar referensi.
-4. Membuat antarmuka lebih menarik dengan CSS styling.
+4. Membuat antarmuka lebih menarik dengan CSS styling. [IN PROGRESS]
 
 
 # TokoGambar
