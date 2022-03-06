@@ -80,6 +80,7 @@ nav {
   text-align: center;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   flex-direction: row;
 }
 
@@ -105,8 +106,9 @@ nav {
     	<br>
     	<div></div>
     	<br>
+    	<h3>Insert your image HERE</h3>
     	<div class="inputbox">
-    			<input type="file" accept="image/*" id="inputFile" onchange="handleInputFile(this.files[0])">
+    			<input type="file" accept="image/*" id="inputFile" onchange="handleInputFile(this.files[0])" style="text-align: center">
     			<br>
    	 		<div></div>
     			<br>
@@ -115,13 +117,13 @@ nav {
     		<br>
    	 	<div></div>
     		<br>
-    		<div class="inputImage">
+    		<div class="inputImage" style="padding: 25px 50px 75px">
     			<h3>Your Image:</h3>
     			<div>
-    				<img id="previewImage" width="200">
+    				<img id="previewImage" style="max-width: 100%">
     			</div>
     		</div>
-    		<div class="replicaImage">
+    		<div class="replicaImage" style="padding: 25px 50px 75px">
     			<h3>Found Replica:</h3>
     			<div id="similarImages"></div>
     		</div>
@@ -180,7 +182,7 @@ nav {
                 images.forEach((value) => {
                     const node = document.createElement('div');
                     node.innerHTML = `
-                        <img src="/images/${value.filename}" width="200">
+                        <img src="/images/${value.filename}" style="max-width: 100%">
                         <p>${value.filename}</p>
                     `
                     domSimilarImages.appendChild(node);
