@@ -74,7 +74,7 @@ func (rb searchReqBody) GetByte() ([]byte, error) {
 
 type dbRecord struct {
 	FileName string
-	Hash     string
+	Ima     []byte
 }
 
 type similarImage struct {

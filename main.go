@@ -1,13 +1,15 @@
 package main
 
 import (
-	"crypto/sha256"
-	"encoding/hex"
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"image"
+	"image/jpeg"
+	"github.com/corona10/goimagehash"
 )
 
 const addr = ":7124"
@@ -82,15 +84,33 @@ func loadDB() ([]dbRecord, error) {
 		}
 		dbRecords = append(dbRecords, dbRecord{
 			FileName: filename,
-			Hash:     getHash(b),
+			Ima:	  b,
 		})
 	}
 	return dbRecords, nil
 }
 
 func searchSimilarImages(dbRecords []dbRecord, data []byte) ([]similarImage, error) {
+	/*
 	hashStr := getHash(data)
 	simImages := []similarImage{}
+	*/
+	
+	hashByte,_ := goimagehash.PerceptionHash(byteToImg(data))
+	simImages := []similarImage{}
+	
+	for _, record := range dbRecords {
+		imgHash,_ := goimagehash.PerceptionHash(byteToImg(record.Ima))
+		dist,_ :=hashByte.Distance(imgHash)
+		if dist<5{
+			simImages = append(simImages, similarImage{
+				FileName:        record.FileName,
+				SimilarityScore: (float64) (dist),
+			})
+		}
+	}
+	
+	/*
 	for _, record := range dbRecords {
 		if record.Hash == hashStr {
 			simImages = append(simImages, similarImage{
@@ -99,12 +119,25 @@ func searchSimilarImages(dbRecords []dbRecord, data []byte) ([]similarImage, err
 			})
 		}
 	}
+	*/
 	return simImages, nil
 }
 
+/*
 func getHash(data []byte) string {
 	h := sha256.New()
 	h.Write(data)
 
 	return hex.EncodeToString(h.Sum(nil))
+}
+*/
+
+
+func byteToImg (data []byte) image.Image{
+	img, err := jpeg.Decode(bytes.NewReader(data))
+	if err != nil {
+		log.Fatalln(err)
+		fmt.Println("di sini")
+	}	
+	return img
 }
