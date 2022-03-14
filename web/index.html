@@ -12,7 +12,7 @@
   --secondary-color: #ea2027;
   --line-height: 1.7rem;
   --transition: 0.4s ease-in;
-  img {max-width: 100%}
+  img {max-width: 100%;}
 }
 
 /* Smooth scroll effect */
@@ -184,6 +184,10 @@ nav {
                     node.innerHTML = `
                         <img src="/images/${value.filename}" style="max-width: 100%">
                         <p>${value.filename}</p>
+                        <p>Similarity Score : ${value.similarity_score}</p>
+                        <br>
+                        <div></div>
+                        <br>
                     `
                     domSimilarImages.appendChild(node);
                 });

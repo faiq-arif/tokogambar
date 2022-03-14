@@ -4,11 +4,12 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"image"
+	"image/jpeg"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"image"
-	"image/jpeg"
+
 	"github.com/corona10/goimagehash"
 )
 
@@ -84,7 +85,7 @@ func loadDB() ([]dbRecord, error) {
 		}
 		dbRecords = append(dbRecords, dbRecord{
 			FileName: filename,
-			Ima:	  b,
+			Ima:      b,
 		})
 	}
 	return dbRecords, nil
@@ -92,33 +93,38 @@ func loadDB() ([]dbRecord, error) {
 
 func searchSimilarImages(dbRecords []dbRecord, data []byte) ([]similarImage, error) {
 	/*
-	hashStr := getHash(data)
-	simImages := []similarImage{}
+		hashStr := getHash(data)
+		simImages := []similarImage{}
 	*/
-	
-	hashByte,_ := goimagehash.PerceptionHash(byteToImg(data))
+
+	hashByte, _ := goimagehash.PerceptionHash(byteToImg(data))
 	simImages := []similarImage{}
-	
+	//dist2 := 100
+
 	for _, record := range dbRecords {
-		imgHash,_ := goimagehash.PerceptionHash(byteToImg(record.Ima))
-		dist,_ :=hashByte.Distance(imgHash)
-		if dist<5{
-			simImages = append(simImages, similarImage{
-				FileName:        record.FileName,
-				SimilarityScore: (float64) (dist),
-			})
-		}
+		imgHash, _ := goimagehash.PerceptionHash(byteToImg(record.Ima))
+		dist, _ := hashByte.Distance(imgHash)
+		log.Printf("Similarity Score : %v", dist)
+		simImages = append(simImages, similarImage{
+			FileName:        record.FileName,
+			SimilarityScore: (float64)(dist),
+		})
+		/*if dist < dist2 {
+			dist2 := dist
+
+
+		}*/
 	}
-	
+
 	/*
-	for _, record := range dbRecords {
-		if record.Hash == hashStr {
-			simImages = append(simImages, similarImage{
-				FileName:        record.FileName,
-				SimilarityScore: 100.0,
-			})
+		for _, record := range dbRecords {
+			if record.Hash == hashStr {
+				simImages = append(simImages, similarImage{
+					FileName:        record.FileName,
+					SimilarityScore: 100.0,
+				})
+			}
 		}
-	}
 	*/
 	return simImages, nil
 }
@@ -132,12 +138,11 @@ func getHash(data []byte) string {
 }
 */
 
-
-func byteToImg (data []byte) image.Image{
+func byteToImg(data []byte) image.Image {
 	img, err := jpeg.Decode(bytes.NewReader(data))
 	if err != nil {
 		log.Fatalln(err)
 		fmt.Println("di sini")
-	}	
+	}
 	return img
 }
